@@ -1,0 +1,9 @@
+language: java
+jdk:
+  - openjdk6
+  - openjdk7
+  - oraclejdk7
+install:
+  - gem install bundler
+  - bundle install
+script: buildr clean package

@@ -7,3 +7,4 @@
 /*.ids
 /_buildr.rb
 /tmp
+/Gemfile.lock

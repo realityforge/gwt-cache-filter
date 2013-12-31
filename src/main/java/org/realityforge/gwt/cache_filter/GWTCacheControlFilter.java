@@ -52,7 +52,8 @@ public class GWTCacheControlFilter
       httpResponse.setHeader( "Pragma", "no-cache" );
       // HTTP 1.1 (disable caching of any kind)
       // HTTP 1.1 'pre-check=0, post-check=0' => (Internet Explorer should always check)
-      httpResponse.setHeader( "Cache-control", "no-cache, no-store, must-revalidate, pre-check=0, post-check=0" );
+      //Note: no-store is not included here as it will disable offline application storage on Firefox
+      httpResponse.setHeader( "Cache-control", "no-cache, must-revalidate, pre-check=0, post-check=0" );
     }
     else if ( requestURI.contains( ".cache." ) )
     {

@@ -1,5 +1,8 @@
 ## 0.3:
 
+* Remove no-store from the Cache-control header as it disables offline application
+  storage on Firefox.
+
 ## 0.2:
 
 * Add web fragment so that the filter is automatically added when added to war files.

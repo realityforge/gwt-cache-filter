@@ -10,9 +10,16 @@ define 'gwt-cache-filter' do
 
   project.version = ENV['PRODUCT_VERSION'] if ENV['PRODUCT_VERSION']
 
+  pom.add_apache2_license
+  pom.add_github_project('realityforge/gwt-cache-filter')
+  pom.add_developer('realityforge', 'Peter Donald')
+  pom.provided_dependencies.concat [:javax_servlet]
+
   compile.with :javax_servlet
 
   package(:jar)
+  package(:sources)
+  package(:javadoc)
 
   iml.add_jruby_facet
 end

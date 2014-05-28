@@ -1,6 +1,7 @@
 require 'buildr/git_auto_version'
 require 'buildr/gpg'
 require 'buildr/top_level_generate_dir'
+require 'buildr/custom_pom'
 
 desc 'GWT Cache Filter'
 define 'gwt-cache-filter' do

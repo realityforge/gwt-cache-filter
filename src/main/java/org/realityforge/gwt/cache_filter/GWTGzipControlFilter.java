@@ -72,7 +72,7 @@ public class GWTGzipControlFilter implements Filter
         if (reqUrl.endsWith(gzExt))
         {
             /***
-             Just using response.setContentType() doesn't work, it is get reset
+             Just using response.setContentType() doesn't work, it gets reset
              when filterChain.doFilter() is called. A custom response wrapper has
              to be made, which would force the content type. See:
              http://stackoverflow.com/a/24846284/49153

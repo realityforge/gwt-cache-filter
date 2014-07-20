@@ -1,17 +1,13 @@
 package org.realityforge.gwt.cache_filter;
 
-import java.io.IOException;
-import java.util.Calendar;
-import java.util.Date;
-import javax.servlet.Filter;
-import javax.servlet.FilterChain;
-import javax.servlet.FilterConfig;
-import javax.servlet.ServletException;
-import javax.servlet.ServletRequest;
-import javax.servlet.ServletResponse;
-import javax.servlet.annotation.WebFilter;
+import javax.servlet.*;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
+import javax.servlet.http.HttpServletResponseWrapper;
+import java.io.File;
+import java.io.IOException;
+import java.util.HashMap;
+import java.util.Map;
 
 /**
  * Filter to redirect all files to their corresponding .gz file, if it exists, and serve

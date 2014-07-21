@@ -14,7 +14,7 @@ import javax.servlet.http.HttpServletResponse;
 /**
  * Filter to serve a .gz file using Content-Encoding gzip if the file exists and content encoding is supported.
  */
-@WebFilter( filterName = "GWTGzipControlFilter" )
+@WebFilter( filterName = "GWTGzipControlFilter", urlPatterns = "/*" )
 public class GWTGzipControlFilter
   extends AbstractFilter
 {

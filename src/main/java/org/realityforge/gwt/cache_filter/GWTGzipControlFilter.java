@@ -66,7 +66,7 @@ public class GWTGzipControlFilter
     }
   }
 
-  public static boolean acceptsGzip( final HttpServletRequest request )
+  private boolean acceptsGzip( final HttpServletRequest request )
   {
     final String header = request.getHeader( "Accept-Encoding" );
     return null != header && header.contains( "gzip" );

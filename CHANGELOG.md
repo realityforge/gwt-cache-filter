@@ -1,6 +1,6 @@
 ## 0.4:
 
-* Add GWTGzipControlFilter to serve compressed gwt artifacts. Submitted by aliakhtar.
+* Add GWTGzipFilter to serve compressed gwt artifacts. Submitted by aliakhtar.
 
 ## 0.3:
 

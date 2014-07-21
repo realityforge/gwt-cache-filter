@@ -53,3 +53,7 @@ the following inherits to the ".gwt.xml" file.
 ```xml
   <inherits name="com.google.gwt.precompress.Precompress"/>
 ```
+
+A very simple example of this code is available in the
+[gwt-cache-filter-example](https://github.com/realityforge/gwt-cache-filter-example)
+project.

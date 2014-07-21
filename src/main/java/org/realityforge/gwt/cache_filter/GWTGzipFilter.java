@@ -13,6 +13,17 @@ import javax.servlet.http.HttpServletResponse;
 
 /**
  * Filter to serve a .gz file using Content-Encoding gzip if the file exists and content encoding is supported.
+ *
+ * For each request, this filter checks to see if:
+ * 1) The browser accepts gzip encoding (via the Accept-Encoding header)
+ *
+ * 2) A file with the request url + .gz exists and is readable.
+ *
+ * 3) If those conditions match, it then sets the 'Content Encoding' header to gzip, and dispatches
+ * the gzipped file instead of the non-gzipped version.
+ *
+ * Example: user goes to example.com/foo.js. If example.com/foo.js.gz exists, then
+ * example.com/foo.js.gz is served instead of foo.js
  */
 @WebFilter( filterName = "GWTGzipFilter", urlPatterns = "/*" )
 public class GWTGzipFilter

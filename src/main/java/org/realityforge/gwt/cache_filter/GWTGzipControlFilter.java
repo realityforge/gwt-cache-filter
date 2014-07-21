@@ -2,8 +2,6 @@ package org.realityforge.gwt.cache_filter;
 
 import java.io.File;
 import java.io.IOException;
-import java.util.HashMap;
-import java.util.Map;
 import javax.servlet.FilterChain;
 import javax.servlet.ServletException;
 import javax.servlet.ServletRequest;
@@ -20,23 +18,6 @@ public class GWTGzipControlFilter
   extends AbstractFilter
 {
   private static String gzExt = ".gz";
-  private static final Map<String, String> mimeTypes = new HashMap<>();
-
-  static
-  {
-    mimeTypes.put( ".txt", "text/plain" );
-    mimeTypes.put( ".html", "text/html" );
-    mimeTypes.put( ".xhtml", "application/xhtml+xml" );
-    mimeTypes.put( ".xml", "application/xml" );
-    mimeTypes.put( ".rss", "application/xml+rss" );
-    mimeTypes.put( ".js", "text/javascript" );
-    mimeTypes.put( ".css", "text/css" );
-    mimeTypes.put( ".png", "image/png" );
-    mimeTypes.put( ".gif", "image/gif" );
-    mimeTypes.put( ".jpeg", "image/jpeg" );
-    mimeTypes.put( ".jpg", "image/jpeg" );
-    mimeTypes.put( ".gz", "application/x-gzip" );
-  }
 
   public static void setGzipExtension( String newExt )
   {
@@ -44,11 +25,6 @@ public class GWTGzipControlFilter
     {
       gzExt = newExt;
     }
-  }
-
-  public static void addMimeType( String fileExtWithDot, String mimeType )
-  {
-    mimeTypes.put( fileExtWithDot, mimeType );
   }
 
   @Override
@@ -75,17 +51,24 @@ public class GWTGzipControlFilter
 
     if ( reqUrl.endsWith( gzExt ) )
     {
+      final String mimeType = getMimeType( request, reqUrl );
       /***
        Just using response.setContentType() doesn't work, it gets reset
        when filterChain.doFilter() is called. A custom response wrapper has
        to be made, which would force the content type. See:
        http://stackoverflow.com/a/24846284/49153
        ****/
-
-      ForcableContentTypeWrapper newResponse = new ForcableContentTypeWrapper( response );
-      newResponse.setHeader( "Content-Encoding", "gzip" );
-      newResponse.forceContentType( getMimeType( reqUrl, true ) );
-      filterChain.doFilter( request, newResponse );
+      if ( null != mimeType )
+      {
+        ForcableContentTypeWrapper newResponse = new ForcableContentTypeWrapper( response );
+        newResponse.setHeader( "Content-Encoding", "gzip" );
+        newResponse.forceContentType( mimeType );
+        filterChain.doFilter( request, newResponse );
+      }
+      else
+      {
+        filterChain.doFilter( request, response );
+      }
       return;
     }
 
@@ -110,15 +93,11 @@ public class GWTGzipControlFilter
     return ( header != null && header.contains( "gzip" ) );
   }
 
-  public static String getMimeType( String filePath, final boolean removeGzExtension )
+  public static String getMimeType( final HttpServletRequest request, String filePath )
   {
-    if ( removeGzExtension )
-    {
-      filePath = filePath.substring( 0, filePath.length() - gzExt.length() );
-    }
-
+    filePath = filePath.substring( 0, filePath.length() - gzExt.length() );
     final String ext = filePath.substring( filePath.lastIndexOf( "." ), filePath.length() );
-    return ( mimeTypes.containsKey( ext ) ) ? mimeTypes.get( ext ) : mimeTypes.get( gzExt );
+    return request.getServletContext().getMimeType( ext );
   }
 
   private class ForcableContentTypeWrapper

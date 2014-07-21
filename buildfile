@@ -15,6 +15,7 @@ define 'gwt-cache-filter' do
   pom.add_apache_v2_license
   pom.add_github_project('realityforge/gwt-cache-filter')
   pom.add_developer('realityforge', 'Peter Donald')
+  pom.add_developer('aliakhtar', 'Ali')
   pom.provided_dependencies.concat [:javax_servlet]
 
   compile.with :javax_servlet

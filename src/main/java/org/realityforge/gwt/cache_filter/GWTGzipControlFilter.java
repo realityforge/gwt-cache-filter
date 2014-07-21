@@ -19,15 +19,7 @@ import javax.servlet.http.HttpServletResponse;
 public class GWTGzipControlFilter
   extends AbstractFilter
 {
-  private static String gzExt = ".gz";
-
-  public static void setGzipExtension( String newExt )
-  {
-    if ( newExt != null )
-    {
-      gzExt = newExt;
-    }
-  }
+  private static final String GZIP_EXTENSION = ".gz";
 
   @Override
   public void doFilter( final ServletRequest servletRequest,
@@ -47,13 +39,16 @@ public class GWTGzipControlFilter
       final String resourcePath = request.getServletPath();
       final String realPath = request.getServletContext().getRealPath( resourcePath );
       final File file = null == realPath ? null : new File( realPath );
-      if ( null == file || !file.exists() || file.isDirectory() )
+      if ( null == file ||
+           resourcePath.endsWith( GZIP_EXTENSION ) ||
+           !file.exists() ||
+           file.isDirectory() )
       {
         filterChain.doFilter( request, response );
       }
-      else if ( !resourcePath.endsWith( gzExt ) )
+      else
       {
-        final String gzippedPath = realPath + gzExt;
+        final String gzippedPath = realPath + GZIP_EXTENSION;
         final File gzippedFile = new File( gzippedPath );
 
         if ( !gzippedFile.exists() || gzippedFile.isDirectory() )
@@ -63,7 +58,7 @@ public class GWTGzipControlFilter
         else
         {
           final RequestDispatcher dispatcher =
-            request.getServletContext().getRequestDispatcher( resourcePath + gzExt );
+            request.getServletContext().getRequestDispatcher( resourcePath + GZIP_EXTENSION );
           response.setHeader( "Content-Encoding", "gzip" );
           dispatcher.include( request, response );
         }

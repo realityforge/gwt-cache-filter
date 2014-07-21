@@ -28,7 +28,9 @@ public class GWTGzipControlFilter
   }
 
   @Override
-  public void doFilter( ServletRequest servletRequest, ServletResponse servletResponse, FilterChain filterChain )
+  public void doFilter( final ServletRequest servletRequest,
+                        final ServletResponse servletResponse,
+                        final FilterChain filterChain )
     throws IOException, ServletException
   {
     final HttpServletRequest request = (HttpServletRequest) servletRequest;
@@ -37,60 +39,60 @@ public class GWTGzipControlFilter
     if ( !acceptsGzip( request ) )
     {
       filterChain.doFilter( request, response );
-      return;
     }
-
-    String reqUrl = request.getRequestURI();
-    String reqPath = request.getServletContext().getRealPath( reqUrl );
-    File reqFile = new File( reqPath );
-    if ( !reqFile.exists() || reqFile.isDirectory() )
+    else
     {
-      filterChain.doFilter( request, response );
-      return;
-    }
-
-    if ( reqUrl.endsWith( gzExt ) )
-    {
-      final String mimeType = getMimeType( request, reqUrl );
-      /***
-       Just using response.setContentType() doesn't work, it gets reset
-       when filterChain.doFilter() is called. A custom response wrapper has
-       to be made, which would force the content type. See:
-       http://stackoverflow.com/a/24846284/49153
-       ****/
-      if ( null != mimeType )
-      {
-        ForcableContentTypeWrapper newResponse = new ForcableContentTypeWrapper( response );
-        newResponse.setHeader( "Content-Encoding", "gzip" );
-        newResponse.forceContentType( mimeType );
-        filterChain.doFilter( request, newResponse );
-      }
-      else
+      final String reqUrl = request.getRequestURI();
+      final String reqPath = request.getServletContext().getRealPath( reqUrl );
+      final File reqFile = new File( reqPath );
+      if ( !reqFile.exists() || reqFile.isDirectory() )
       {
         filterChain.doFilter( request, response );
       }
-      return;
+      else if ( reqUrl.endsWith( gzExt ) )
+      {
+        final String mimeType = getMimeType( request, reqUrl );
+        /***
+         Just using response.setContentType() doesn't work, it gets reset
+         when filterChain.doFilter() is called. A custom response wrapper has
+         to be made, which would force the content type. See:
+         http://stackoverflow.com/a/24846284/49153
+         ****/
+        if ( null != mimeType )
+        {
+          ForcableContentTypeWrapper newResponse = new ForcableContentTypeWrapper( response );
+          newResponse.setHeader( "Content-Encoding", "gzip" );
+          newResponse.forceContentType( mimeType );
+          filterChain.doFilter( request, newResponse );
+        }
+        else
+        {
+          filterChain.doFilter( request, response );
+        }
+      }
+      else
+      {
+        final String gzippedPath = reqPath + gzExt;
+        final File gzippedFile = new File( gzippedPath );
+
+        if ( !gzippedFile.exists() || gzippedFile.isDirectory() )
+        {
+          filterChain.doFilter( request, servletResponse );
+        }
+        else
+        {
+          final String gzippedUrl = reqUrl + gzExt;
+          response.sendRedirect( gzippedUrl );
+          filterChain.doFilter( request, response );
+        }
+      }
     }
-
-    String gzippedPath = reqPath + gzExt;
-    File gzippedFile = new File( gzippedPath );
-
-    if ( !gzippedFile.exists() || gzippedFile.isDirectory() )
-    {
-      filterChain.doFilter( request, servletResponse );
-      return;
-    }
-
-    String gzippedUrl = reqUrl + gzExt;
-
-    response.sendRedirect( gzippedUrl );
-    filterChain.doFilter( request, response );
   }
 
-  public static boolean acceptsGzip( HttpServletRequest request )
+  public static boolean acceptsGzip( final HttpServletRequest request )
   {
-    String header = request.getHeader( "Accept-Encoding" );
-    return ( header != null && header.contains( "gzip" ) );
+    final String header = request.getHeader( "Accept-Encoding" );
+    return null != header && header.contains( "gzip" );
   }
 
   public static String getMimeType( final HttpServletRequest request, String filePath )
@@ -103,17 +105,17 @@ public class GWTGzipControlFilter
   private class ForcableContentTypeWrapper
     extends HttpServletResponseWrapper
   {
-    public ForcableContentTypeWrapper( HttpServletResponse response )
+    public ForcableContentTypeWrapper( final HttpServletResponse response )
     {
       super( response );
     }
 
     @Override
-    public void setContentType( String type )
+    public void setContentType( final String type )
     {
     }
 
-    public void forceContentType( String type )
+    public void forceContentType( final String type )
     {
       super.setContentType( type );
     }

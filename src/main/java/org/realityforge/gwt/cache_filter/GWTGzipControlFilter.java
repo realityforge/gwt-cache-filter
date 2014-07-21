@@ -12,8 +12,7 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
 /**
- * Filter to redirect all files to their corresponding .gz file, if it exists, and serve
- * it with the proper encoding / content type. Works best if called after GWTCacheControlFilter
+ * Filter to serve a .gz file using Content-Encoding gzip if the file exists and content encoding is supported.
  */
 @WebFilter( filterName = "GWTGzipControlFilter" )
 public class GWTGzipControlFilter

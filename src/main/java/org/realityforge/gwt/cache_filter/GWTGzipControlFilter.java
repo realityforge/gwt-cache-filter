@@ -4,9 +4,7 @@ import java.io.File;
 import java.io.IOException;
 import java.util.HashMap;
 import java.util.Map;
-import javax.servlet.Filter;
 import javax.servlet.FilterChain;
-import javax.servlet.FilterConfig;
 import javax.servlet.ServletException;
 import javax.servlet.ServletRequest;
 import javax.servlet.ServletResponse;
@@ -19,7 +17,7 @@ import javax.servlet.http.HttpServletResponseWrapper;
  * it with the proper encoding / content type. Works best if called after GWTCacheControlFilter
  */
 public class GWTGzipControlFilter
-  implements Filter
+  extends AbstractFilter
 {
   private static String gzExt = ".gz";
   private static final Map<String, String> mimeTypes = new HashMap<>();
@@ -51,17 +49,6 @@ public class GWTGzipControlFilter
   public static void addMimeType( String fileExtWithDot, String mimeType )
   {
     mimeTypes.put( fileExtWithDot, mimeType );
-  }
-
-  @Override
-  public void init( final FilterConfig filterConfig )
-    throws ServletException
-  {
-  }
-
-  @Override
-  public void destroy()
-  {
   }
 
   @Override

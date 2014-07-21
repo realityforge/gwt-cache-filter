@@ -3,9 +3,7 @@ package org.realityforge.gwt.cache_filter;
 import java.io.IOException;
 import java.util.Calendar;
 import java.util.Date;
-import javax.servlet.Filter;
 import javax.servlet.FilterChain;
-import javax.servlet.FilterConfig;
 import javax.servlet.ServletException;
 import javax.servlet.ServletRequest;
 import javax.servlet.ServletResponse;
@@ -18,15 +16,9 @@ import javax.servlet.http.HttpServletResponse;
  */
 @WebFilter( filterName = "GWTCacheControlFilter", urlPatterns = "/*" )
 public class GWTCacheControlFilter
-  implements Filter
+  extends AbstractFilter
 {
   public static final int YEAR_IN_MINUTES = 365 * 24 * 60 * 60;
-
-  @Override
-  public void init( final FilterConfig config )
-    throws ServletException
-  {
-  }
 
   @Override
   public void doFilter( final ServletRequest request,
@@ -67,10 +59,5 @@ public class GWTCacheControlFilter
     }
 
     filterChain.doFilter( request, response );
-  }
-
-  @Override
-  public void destroy()
-  {
   }
 }

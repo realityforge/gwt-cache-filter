@@ -24,8 +24,8 @@ into the build system. i.e.
 </dependency>
 ```
 
-This will apply a filter across your entire application. Sometimes you will want to
-restrict the filter so that it only covers the gwt part of the application in which
+This will apply a filter across your entire application. Almost always you will want
+to restrict the filter so that it only covers the gwt part of the application in which
 case you should add the following snippet to web.xml;
 
 ```xml

@@ -43,9 +43,9 @@ public class GWTGzipControlFilter
     else
     {
       final String reqUrl = request.getRequestURI();
-      final String reqPath = request.getServletContext().getRealPath( reqUrl );
-      final File reqFile = new File( reqPath );
-      if ( !reqFile.exists() || reqFile.isDirectory() )
+      final String realPath = request.getServletContext().getRealPath( reqUrl );
+      final File file = null == realPath ? null : new File( realPath );
+      if ( null == file || !file.exists() || file.isDirectory() )
       {
         filterChain.doFilter( request, response );
       }
@@ -72,7 +72,7 @@ public class GWTGzipControlFilter
       }
       else
       {
-        final String gzippedPath = reqPath + gzExt;
+        final String gzippedPath = realPath + gzExt;
         final File gzippedFile = new File( gzippedPath );
 
         if ( !gzippedFile.exists() || gzippedFile.isDirectory() )

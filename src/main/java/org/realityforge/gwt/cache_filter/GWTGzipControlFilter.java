@@ -40,8 +40,7 @@ public class GWTGzipControlFilter
       final File file = null == realPath ? null : new File( realPath );
       if ( null == file ||
            resourcePath.endsWith( GZIP_EXTENSION ) ||
-           !file.exists() ||
-           file.isDirectory() )
+           !file.isFile() )
       {
         filterChain.doFilter( request, response );
       }
@@ -50,7 +49,7 @@ public class GWTGzipControlFilter
         final String gzippedPath = realPath + GZIP_EXTENSION;
         final File gzippedFile = new File( gzippedPath );
 
-        if ( !gzippedFile.exists() || gzippedFile.isDirectory() )
+        if ( !gzippedFile.isFile() )
         {
           filterChain.doFilter( request, servletResponse );
         }

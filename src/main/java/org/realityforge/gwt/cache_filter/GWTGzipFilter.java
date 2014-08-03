@@ -69,6 +69,11 @@ public class GWTGzipFilter
           final RequestDispatcher dispatcher =
             request.getServletContext().getRequestDispatcher( resourcePath + GZIP_EXTENSION );
           response.setHeader( "Content-Encoding", "gzip" );
+          final String mimeType = servletRequest.getServletContext().getMimeType( resourcePath );
+          if ( null != mimeType )
+          {
+            response.setHeader( "Content-Type", mimeType );
+          }
           dispatcher.include( request, response );
         }
       }

@@ -1,3 +1,8 @@
+## 0.5:
+
+* Ensure that the GWTGzipFilter sets the Content-Type, otherwise browsers guess
+  the content type and some (IE9) get it wrong.
+
 ## 0.4:
 
 * Add GWTGzipFilter to serve compressed gwt artifacts. Submitted by aliakhtar.

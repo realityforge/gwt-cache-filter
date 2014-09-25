@@ -5,7 +5,10 @@
 
 ## 0.4:
 
-* Add GWTGzipFilter to serve compressed gwt artifacts. Submitted by aliakhtar.
+* Add GWTGzipFilter to serve compressed gwt artifacts. The filter optionally
+  redirects any files to their .gz version, if it exists, for serving gzip files.
+  Works best with com.google.gwt.precompress.Precompress prelinker, which
+  generates .gz versions of all static files. Submitted by Ali Akhtar:
 
 ## 0.3:
 

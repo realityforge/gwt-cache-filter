@@ -1,3 +1,7 @@
+## 0.6:
+
+* Set the asyncSupported flag to true for the filters.
+
 ## 0.5:
 
 * Ensure that the GWTGzipFilter sets the Content-Type, otherwise browsers guess

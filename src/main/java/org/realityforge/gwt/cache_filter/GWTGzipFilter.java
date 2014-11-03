@@ -25,7 +25,7 @@ import javax.servlet.http.HttpServletResponse;
  * Example: user goes to example.com/foo.js. If example.com/foo.js.gz exists, then
  * example.com/foo.js.gz is served instead of foo.js
  */
-@WebFilter( filterName = "GWTGzipFilter", urlPatterns = "/*" )
+@WebFilter( filterName = "GWTGzipFilter", urlPatterns = "/*", asyncSupported = true )
 public class GWTGzipFilter
   extends AbstractFilter
 {

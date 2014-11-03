@@ -14,7 +14,7 @@ import javax.servlet.http.HttpServletResponse;
 /**
  * Filter to disable caching of generated GWT files to ensure that the correct files get cached.
  */
-@WebFilter( filterName = "GWTCacheControlFilter", urlPatterns = "/*" )
+@WebFilter( filterName = "GWTCacheControlFilter", urlPatterns = "/*", asyncSupported = true )
 public class GWTCacheControlFilter
   extends AbstractFilter
 {

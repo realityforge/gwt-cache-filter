@@ -2,6 +2,7 @@ gwt-cache-filter
 ================
 
 [![Build Status](https://secure.travis-ci.org/realityforge/gwt-cache-filter.png?branch=master)](http://travis-ci.org/realityforge/gwt-cache-filter)
+[<img src="https://img.shields.io/maven-central/v/org.realityforge.gwt.cache-filter/gwt-cache-filter.svg?label=latest%20release"/>](http://search.maven.org/#search%7Cga%7C1%7Cg%3A%22org.realityforge.gwt.cache-filter%22%20a%3A%22gwt-cache-filter%22)
 
 The project consists of two filters. The `GWTCacheControlFilter` adds the appropriate
 caching attributes to GWT generated files based on *.cache.* and *.nocache.* naming

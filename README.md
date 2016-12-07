@@ -9,7 +9,7 @@ caching attributes to GWT generated files based on *.cache.* and *.nocache.* nam
 patterns. The `GWTGzipFilter` will serve a gzipped variant of a static file
 if one is present on the file system and the request specifies the "Accept-Encoding"
 http header to include "gzip". The gzipped variant of the static file should exist
-on the file system with he same name as the resource but with ".gz" suffix.
+on the file system with the same name as the resource but with ".gz" suffix.
 
 Quick Start
 ===========
@@ -48,7 +48,7 @@ case you should add the following snippet to web.xml;
   </filter-mapping>
 ```
 
-To get the GWT compiler to generate the gzipped files for you, the easiest way to add
+To get the GWT compiler to generate the gzipped files for you, the easiest way is to add
 the following inherits to the ".gwt.xml" file.
 
 ```xml

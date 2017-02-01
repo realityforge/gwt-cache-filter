@@ -1,5 +1,4 @@
-gwt-cache-filter
-================
+# gwt-cache-filter
 
 [![Build Status](https://secure.travis-ci.org/realityforge/gwt-cache-filter.png?branch=master)](http://travis-ci.org/realityforge/gwt-cache-filter)
 [<img src="https://img.shields.io/maven-central/v/org.realityforge.gwt.cache-filter/gwt-cache-filter.svg?label=latest%20release"/>](http://search.maven.org/#search%7Cga%7C1%7Cg%3A%22org.realityforge.gwt.cache-filter%22%20a%3A%22gwt-cache-filter%22)
@@ -11,8 +10,7 @@ if one is present on the file system and the request specifies the "Accept-Encod
 http header to include "gzip". The gzipped variant of the static file should exist
 on the file system with the same name as the resource but with ".gz" suffix.
 
-Quick Start
-===========
+## Quick Start
 
 The simplest way to use the library is to add the following dependency
 into the build system. i.e.

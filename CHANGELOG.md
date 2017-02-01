@@ -1,3 +1,8 @@
+## 0.7:
+
+* Add immutable parameter to Cache-Control to indicate cached resources should
+  never be re-validated. This is a significant optimization for Firefox users.
+
 ## 0.6:
 
 * Set the asyncSupported flag to true for the filters.

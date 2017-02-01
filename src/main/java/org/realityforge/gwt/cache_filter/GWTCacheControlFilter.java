@@ -54,7 +54,8 @@ public class GWTCacheControlFilter
       calendar.setTime( new Date() );
       calendar.add( Calendar.YEAR, 1 );
       httpResponse.setDateHeader( "Expires", calendar.getTime().getTime() );
-      httpResponse.setHeader( "Cache-control", "max-age=" + YEAR_IN_MINUTES + ", public" );
+      //Note: immutable tells firefox to never revalidate as data will never change
+      httpResponse.setHeader( "Cache-control", "max-age=" + YEAR_IN_MINUTES + ", public, immutable" );
       httpResponse.setHeader( "Pragma", "" );
     }
 

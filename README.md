@@ -19,7 +19,7 @@ into the build system. i.e.
 <dependency>
     <groupId>org.realityforge.gwt.cache-filter</groupId>
     <artifactId>gwt-cache-filter</artifactId>
-    <version>0.6</version>
+    <version>0.7</version>
 </dependency>
 ```
 

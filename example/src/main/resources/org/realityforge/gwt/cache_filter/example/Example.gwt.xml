@@ -1,0 +1,12 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<module rename-to='example'>
+  <inherits name="com.google.gwt.user.User"/>
+  <inherits name="com.google.gwt.logging.Logging"/>
+  <inherits name="com.google.gwt.precompress.Precompress"/>
+
+  <add-linker name="xsiframe"/>
+
+  <entry-point class='org.realityforge.gwt.cache_filter.example.client.Example'/>
+
+  <source path='client'/>
+</module>

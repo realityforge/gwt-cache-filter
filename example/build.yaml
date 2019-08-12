@@ -1,0 +1,14 @@
+repositories:
+  remote:
+   - https://repo.maven.apache.org/maven2
+
+artifacts:
+  javax_javaee: javax:javaee-api:jar:7.0
+  javax_annotation: org.realityforge.javax.annotation:javax.annotation:jar:1.0.0
+  gwt_user: com.google.gwt:gwt-user:jar:2.8.2
+  gwt_dev: com.google.gwt:gwt-dev:jar:2.8.2
+
+  javax_validation: javax.validation:validation-api:jar:1.0.0.GA
+  javax_validation_sources: javax.validation:validation-api:jar:sources:1.0.0.GA
+
+  gwt_cache_filter: org.realityforge.gwt.cache-filter:gwt-cache-filter:jar:0.7

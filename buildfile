@@ -42,4 +42,5 @@ define 'example', :base_dir => "#{File.dirname(__FILE__)}/example" do
 end
 
 task('idea' => 'example:idea')
+task('clean' => 'example:clean')
 task('package' => 'example:package')

@@ -6,4 +6,5 @@
 /_buildr.rb
 /reports
 /target
+/*/target
 /tmp

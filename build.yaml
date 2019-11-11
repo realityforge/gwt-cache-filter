@@ -4,4 +4,4 @@ repositories:
 
 artifacts:
   javax_servlet: org.apache.geronimo.specs:geronimo-servlet_3.0_spec:jar:1.0
-  gwt_user: com.google.gwt:gwt-user:jar:2.8.1
+  gwt_user: org.realityforge.com.google.gwt:gwt-user:jar:2.8.2-v20191108

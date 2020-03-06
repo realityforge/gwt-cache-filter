@@ -12,15 +12,15 @@
     <filter-class>org.realityforge.gwt.cache_filter.GWTCacheControlFilter</filter-class>
   </filter>
   <filter>
-    <filter-name>GWTGzipFilter</filter-name>
-    <filter-class>org.realityforge.gwt.cache_filter.GWTGzipFilter</filter-class>
+    <filter-name>PreEncodedGzipFilter</filter-name>
+    <filter-class>org.realityforge.gwt.cache_filter.PreEncodedGzipFilter</filter-class>
   </filter>
   <filter-mapping>
     <filter-name>GWTCacheControlFilter</filter-name>
     <url-pattern>/example/*</url-pattern>
   </filter-mapping>
   <filter-mapping>
-    <filter-name>GWTGzipFilter</filter-name>
+    <filter-name>PreEncodedGzipFilter</filter-name>
     <url-pattern>/example/*</url-pattern>
   </filter-mapping>
 </web-app>

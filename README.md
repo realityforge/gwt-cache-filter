@@ -34,7 +34,7 @@ case you should add the following snippet to web.xml;
   </filter>
   <filter>
     <filter-name>GWTGzipFilter</filter-name>
-    <filter-class>org.realityforge.gwt.cache_filter.GWTGzipFilter</filter-class>
+    <filter-class>org.realityforge.gwt.cache_filter.PreEncodedGzipFilter</filter-class>
   </filter>
   <filter-mapping>
     <filter-name>GWTCacheControlFilter</filter-name>

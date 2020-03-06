@@ -2,34 +2,40 @@ package org.realityforge.gwt.cache_filter;
 
 import java.io.File;
 import java.io.IOException;
+import java.util.Objects;
 import javax.servlet.FilterChain;
 import javax.servlet.RequestDispatcher;
 import javax.servlet.ServletException;
 import javax.servlet.ServletRequest;
 import javax.servlet.ServletResponse;
-import javax.servlet.annotation.WebFilter;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
 /**
- * Filter to serve a .gz file using Content-Encoding gzip if the file exists and content encoding is supported.
+ * Filter to serve a pre-encoded file if the request matches appropriate Content-Encoding if the pre-encoded file exists and content encoding is supported.
  *
  * For each request, this filter checks to see if:
- * 1) The browser accepts gzip encoding (via the Accept-Encoding header)
+ * 1) The browser accepts encoding (via the Accept-Encoding header)
  *
- * 2) A file with the request url + .gz exists and is readable.
+ * 2) A file with the request url + [extension] exists and is readable.
  *
- * 3) If those conditions match, it then sets the 'Content Encoding' header to gzip, and dispatches
- * the gzipped file instead of the non-gzipped version.
+ * 3) If those conditions match, it then sets the 'Content Encoding' header to [encoding], and dispatches
+ * the encoded file instead of the non-encoded version.
  *
- * Example: user goes to example.com/foo.js. If example.com/foo.js.gz exists, then
- * example.com/foo.js.gz is served instead of foo.js
+ * Example: Assuming a brotli encoding 'br' with extension '.br'. The user goes to example.com/foo.js.
+ * If example.com/foo.js.br exists, then example.com/foo.js.br is served instead of foo.js
  */
-@WebFilter( filterName = "GWTGzipFilter", urlPatterns = "/*", asyncSupported = true )
-public class GWTGzipFilter
+public abstract class AbstractPreEncodedFilter
   extends AbstractFilter
 {
-  private static final String GZIP_EXTENSION = ".gz";
+  private final String _extension;
+  private final String _encoding;
+
+  protected AbstractPreEncodedFilter( final String extension, final String encoding )
+  {
+    _extension = Objects.requireNonNull( extension );
+    _encoding = Objects.requireNonNull( encoding );
+  }
 
   @Override
   public void doFilter( final ServletRequest servletRequest,
@@ -40,7 +46,7 @@ public class GWTGzipFilter
     final HttpServletRequest request = (HttpServletRequest) servletRequest;
     final HttpServletResponse response = (HttpServletResponse) servletResponse;
 
-    if ( !acceptsGzip( request ) )
+    if ( !acceptsEncoding( request ) )
     {
       filterChain.doFilter( request, response );
     }
@@ -49,26 +55,24 @@ public class GWTGzipFilter
       final String resourcePath = request.getServletPath();
       final String realPath = request.getServletContext().getRealPath( resourcePath );
       final File file = null == realPath ? null : new File( realPath );
-      if ( null == file ||
-           resourcePath.endsWith( GZIP_EXTENSION ) ||
-           !file.isFile() )
+      if ( null == file || resourcePath.endsWith( _extension ) || !file.isFile() )
       {
         filterChain.doFilter( request, response );
       }
       else
       {
-        final String gzippedPath = realPath + GZIP_EXTENSION;
-        final File gzippedFile = new File( gzippedPath );
+        final String encodedPath = realPath + _extension;
+        final File encodedFile = new File( encodedPath );
 
-        if ( !gzippedFile.isFile() )
+        if ( !encodedFile.isFile() )
         {
           filterChain.doFilter( request, servletResponse );
         }
         else
         {
           final RequestDispatcher dispatcher =
-            request.getServletContext().getRequestDispatcher( resourcePath + GZIP_EXTENSION );
-          response.setHeader( "Content-Encoding", "gzip" );
+            request.getServletContext().getRequestDispatcher( resourcePath + _extension );
+          response.setHeader( "Content-Encoding", _encoding );
           final String mimeType = servletRequest.getServletContext().getMimeType( resourcePath );
           if ( null != mimeType )
           {
@@ -80,9 +84,9 @@ public class GWTGzipFilter
     }
   }
 
-  private boolean acceptsGzip( final HttpServletRequest request )
+  private boolean acceptsEncoding( final HttpServletRequest request )
   {
     final String header = request.getHeader( "Accept-Encoding" );
-    return null != header && header.contains( "gzip" );
+    return null != header && header.contains( _encoding );
   }
 }

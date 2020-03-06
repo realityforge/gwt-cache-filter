@@ -21,7 +21,7 @@ end
 
 def calc_next_version(version)
   version_parts = version.split('.')
-  "#{version_parts[0]}.#{sprintf('%02d', version_parts[1].to_i + 1)}#{version_parts.length > 2 ? ".#{version_parts[2]}" : ''}"
+  "#{version_parts[0]}.#{sprintf('%d', version_parts[1].to_i + 1)}#{version_parts.length > 2 ? ".#{version_parts[2]}" : ''}"
 end
 
 desc 'Perform a release'

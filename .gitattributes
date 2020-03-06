@@ -1,7 +1,10 @@
 # DO NOT EDIT: File is auto-generated
 * -text
+*.html text
 *.java text
 *.md text
+*.rake text
+*.rb text
 *.xml text
 *.yaml text
 *.yml text

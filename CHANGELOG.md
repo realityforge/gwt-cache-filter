@@ -1,6 +1,8 @@
 # Change Log
 
-### Unreleased
+### [v0.9](https://github.com/realityforge/gwt-cache-filter/tree/v0.9) (2020-03-06) · [Full Changelog](https://github.com/realityforge/gwt-cache-filter/compare/v0.8...v0.9)
+
+Changes in this release:
 
 * Rename `GWTGzipFilter` to `PreEncodedGzipFilter` to reflect reality that filter is unrelated to GWT.
 * Introduce a `AbstractPreEncodedFilter` base class to make supporting other pre-encoded formats easy.

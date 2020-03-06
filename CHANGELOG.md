@@ -1,6 +1,8 @@
 # Change Log
 
-### Unreleased
+### [v0.8](https://github.com/realityforge/gwt-cache-filter/tree/v0.8) (2020-03-06) · [Full Changelog](https://github.com/realityforge/gwt-cache-filter/compare/v0.7...v0.8)
+
+Changes in this release:
 
 * Cache files that end with `.gwt.rpc` as these files named according with content hash and thus can be cached indefinitely.
 

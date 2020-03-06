@@ -5,7 +5,7 @@
 
 The project consists of two filters. The `GWTCacheControlFilter` adds the appropriate
 caching attributes to GWT generated files based on *.cache.* and *.nocache.* naming
-patterns. The `GWTGzipFilter` will serve a gzipped variant of a static file
+patterns. The `PreEncodedGzipFilter` will serve a gzipped variant of a static file
 if one is present on the file system and the request specifies the "Accept-Encoding"
 http header to include "gzip". The gzipped variant of the static file should exist
 on the file system with the same name as the resource but with ".gz" suffix.
@@ -33,7 +33,7 @@ case you should add the following snippet to web.xml;
     <filter-class>org.realityforge.gwt.cache_filter.GWTCacheControlFilter</filter-class>
   </filter>
   <filter>
-    <filter-name>GWTGzipFilter</filter-name>
+    <filter-name>PreEncodedGzipFilter</filter-name>
     <filter-class>org.realityforge.gwt.cache_filter.PreEncodedGzipFilter</filter-class>
   </filter>
   <filter-mapping>
@@ -41,7 +41,7 @@ case you should add the following snippet to web.xml;
     <url-pattern>/example/*</url-pattern>
   </filter-mapping>
   <filter-mapping>
-    <filter-name>GWTGzipFilter</filter-name>
+    <filter-name>PreEncodedGzipFilter</filter-name>
     <url-pattern>/example/*</url-pattern>
   </filter-mapping>
 ```

@@ -2,6 +2,8 @@
 
 ### Unreleased
 
+* Cache files that end with `.gwt.rpc` as these files named according with content hash and thus can be cached indefinitely.
+
 ### [v0.7](https://github.com/realityforge/gwt-cache-filter/tree/v0.7) (2017-02-02) · [Full Changelog](https://github.com/realityforge/gwt-cache-filter/compare/v0.6...v0.7)
 
 * Add immutable parameter to Cache-Control to indicate cached resources should

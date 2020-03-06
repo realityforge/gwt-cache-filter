@@ -47,7 +47,7 @@ public class GWTCacheControlFilter
       //Note: no-store is not included here as it will disable offline application storage on Firefox
       httpResponse.setHeader( "Cache-control", "no-cache, must-revalidate, pre-check=0, post-check=0" );
     }
-    else if ( requestURI.contains( ".cache." ) )
+    else if ( requestURI.contains( ".cache." ) || requestURI.endsWith( ".gwt.rpc" ) )
     {
       // set expiry to back in the past (makes us a bad candidate for caching)
       final Calendar calendar = Calendar.getInstance();

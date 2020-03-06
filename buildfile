@@ -23,6 +23,8 @@ define 'gwt-cache-filter' do
   package(:sources)
   package(:javadoc)
 
+  ipr.add_component_from_artifact(:idea_codestyle)
+
   ipr.extra_modules << 'example/example.iml'
 end
 

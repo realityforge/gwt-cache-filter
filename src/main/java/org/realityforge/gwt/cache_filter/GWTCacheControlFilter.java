@@ -18,7 +18,7 @@ import javax.servlet.http.HttpServletResponse;
 public class GWTCacheControlFilter
   extends AbstractFilter
 {
-  public static final int YEAR_IN_SECONDS = 365 * 24 * 60 * 60;
+  private static final int YEAR_IN_SECONDS = 365 * 24 * 60 * 60;
 
   @Override
   public void doFilter( final ServletRequest request,

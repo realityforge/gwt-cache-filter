@@ -18,7 +18,7 @@ import javax.servlet.http.HttpServletResponse;
 public class GWTCacheControlFilter
   extends AbstractFilter
 {
-  public static final int YEAR_IN_MINUTES = 365 * 24 * 60 * 60;
+  public static final int YEAR_IN_SECONDS = 365 * 24 * 60 * 60;
 
   @Override
   public void doFilter( final ServletRequest request,
@@ -55,7 +55,7 @@ public class GWTCacheControlFilter
       calendar.add( Calendar.YEAR, 1 );
       httpResponse.setDateHeader( "Expires", calendar.getTime().getTime() );
       //Note: immutable tells firefox to never revalidate as data will never change
-      httpResponse.setHeader( "Cache-control", "max-age=" + YEAR_IN_MINUTES + ", public, immutable" );
+      httpResponse.setHeader( "Cache-control", "max-age=" + YEAR_IN_SECONDS + ", public, immutable" );
       httpResponse.setHeader( "Pragma", "" );
     }
 

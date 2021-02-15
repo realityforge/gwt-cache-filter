@@ -4,7 +4,7 @@ language: ruby
 jdk:
   - oraclejdk8
 rvm:
-  - 2.6.6
+  - 2.7.2
 install:
   - gem install bundler
   - bundle install

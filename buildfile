@@ -2,6 +2,8 @@ require 'buildr/git_auto_version'
 require 'buildr/gpg'
 require 'buildr/gwt'
 
+Buildr::MavenCentral.define_publish_tasks(:profile_name => 'org.realityforge', :username => 'realityforge')
+
 desc 'GWT Cache Filter'
 define 'gwt-cache-filter' do
   project.group = 'org.realityforge.gwt.cache-filter'
